@@ -20,7 +20,6 @@
         <english theme="outline" size="35" fill="#ffffff" v-if="language === 'cn'" @click="setLanguage"/>
       </div>
     </div>
-
   </div>
   <router-view/>
 </template>
