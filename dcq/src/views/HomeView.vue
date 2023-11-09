@@ -158,6 +158,16 @@ export default {
   width: 300px;
 }
 
+@keyframes desc-width {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+
 .footer_scroller {
   display: flex;
   overflow: hidden;

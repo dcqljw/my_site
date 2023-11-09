@@ -4,6 +4,7 @@ import ContactView from "@/views/ContactView.vue";
 import ProjectView from "@/views/ProjectView.vue";
 import BlogView from "@/views/BlogView.vue";
 import AboutView from "@/views/AboutView.vue";
+import CoverView from "@/views/CoverView.vue";
 
 const routes = [
     {
@@ -27,6 +28,10 @@ const routes = [
         path: "/blog",
         name: "blog",
         component: BlogView
+    }, {
+        path: "/cover",
+        name: "cover",
+        component: CoverView
     }
 ]
 

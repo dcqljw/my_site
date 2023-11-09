@@ -3,9 +3,13 @@
 </script>
 
 <template>
-  <div style="color: white">联系</div>
+  <div class="contact-view">
+    联系
+  </div>
 </template>
 
-<style scoped>
-
+<style>
+.contact-view {
+  color: white;
+}
 </style>

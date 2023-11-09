@@ -1,6 +1,9 @@
 <template>
-  <!--  <NavItem class="animate__animated " v-bind:class="show_animate" v-show="showNavItem"></NavItem>-->
+  <CoverView v-show="show_cover" class="animate__animated" v-bind:class="show_cover_animate" @click="bless"></CoverView>
   <div class="nav_page animate__animated " v-bind:class="show_animate" v-show="showNavItem">
+    <div class="close_nava_item animate__animated" v-bind:class="close_animate" v-show="showNavItem">
+      <close theme="outline" size="35" fill="black" @click="showNav"/>
+    </div>
     <div class="nav_items">
       <div v-for="item in navList" :key="item">
         <div class="nav_item animate__animated" @click="toView(item[2])">
@@ -13,9 +16,6 @@
       </div>
     </div>
   </div>
-  <div class="close_nava_item animate__animated" v-bind:class="close_animate" v-show="showNavItem">
-    <close theme="outline" size="35" fill="black" @click="showNav"/>
-  </div>
   <div class="header">
     <div class="logo" @click="this.$router.push('/')">
       <div class="logo_div">
@@ -23,14 +23,14 @@
       </div>
     </div>
     <div class="header-left">
-      <div class="animate__animated hidden-xs-only"
+      <div class="header-nav-item animate__animated hidden-xs-only"
            v-on:mouseover="setClass"
            v-on:mouseleave="setClass"
            v-for="item in language === 'cn'?navListCN:navListUS" :key="item">
-        <span>{{ item }}</span>
+        <span @click="this.$router.push(item[1])">{{ item[0] }}</span>
       </div>
-      <div class="contact">
-        <span>{{ language === "cn" ? contactCN : contactUS }}</span>
+      <div>
+        <span @click="bless">祝福</span>
       </div>
       <div>
         <chinese-one theme="outline" size="35" fill="#ffffff" v-if="language === 'en'" @click="setLanguage"/>
@@ -46,21 +46,24 @@
 
 <script>
 import {ChineseOne, English, HamburgerButton, Close} from "@icon-park/vue-next";
+import CoverView from "@/views/CoverView.vue";
 
 export default {
-  components: {ChineseOne, English, HamburgerButton, Close},
+  components: {CoverView, ChineseOne, English, HamburgerButton, Close},
   data() {
     return {
       animate: "",
-      navListUS: ["Project", "Blog", "About"],
-      navListCN: ["项目", "博客", "关于"],
+      navListUS: [["Home", "/"], ["Project", 'project'], ["Blog", 'blog'], ["About", 'about']],
+      navListCN: [["主页", "/"], ["项目", 'project'], ["博客", 'blog'], ["关于", 'about']],
       contactUS: "CONTACT",
-      contactCN: "联系我",
+      contactCN: "联系",
       language: "cn",
-      showNavItem: true,
+      showNavItem: false,
       close_animate: "",
       show_animate: "",
-      navList: [["主页", "home", '/'], ["项目", "project", 'project'], ["博客", "blog", 'blog'], ["关于", "about", 'about'], ["联系", "contact", 'contact']]
+      navList: [["主页", "home", '/'], ["项目", "project", 'project'], ["博客", "blog", 'blog'], ["关于", "about", 'about']],
+      show_cover_animate: "",
+      show_cover: false
     }
   },
   methods: {
@@ -74,6 +77,17 @@ export default {
         this.language = "cn"
       }
       console.log(this.language)
+    },
+    bless() {
+      if (!this.show_cover) {
+        this.show_cover = true
+      }
+      if (this.show_cover_animate === "animate__fadeInDownBig") {
+        this.show_cover_animate = "animate__fadeOutUpBig"
+      } else {
+        this.show_cover_animate = "animate__fadeInDownBig"
+      }
+
     },
     showNav() {
       console.log(this.showNavItem)
@@ -98,11 +112,34 @@ export default {
       this.show_animate = "animate__fadeOutDownBig"
       this.close_animate = "animate__rotateOutUpRight"
     }
+  }, created() {
   }
 }
 </script>
 
 <style>
+.header-nav-item {
+  position: relative;
+}
+
+.header-nav-item:hover {
+  color: #0ff;
+}
+
+.header-nav-item:hover:after {
+  width: 100%;
+}
+
+.header-nav-item:after {
+  color: #0ff;
+  position: absolute;
+  content: "";
+  border-bottom: 3px solid;
+  width: 0;
+  display: block;
+  margin: 10px 0;
+  transition: width 0.1s ease-in-out;
+}
 
 ::-webkit-scrollbar {
   display: none;
@@ -124,6 +161,7 @@ html {
   position: fixed;
   right: 21px;
   top: 20px;
+  cursor: pointer;
 }
 
 body {
@@ -159,9 +197,9 @@ body {
   color: white;
   font-size: 20px;
   border: 2px solid #00FFE5;
-  width: 140px;
+  width: 110px;
   text-align: center;
-  height: 50px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
