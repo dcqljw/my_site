@@ -116,7 +116,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #c7c3c3;
+  background-color: #000000;
   position: fixed;
   z-index: 1000;
 }
