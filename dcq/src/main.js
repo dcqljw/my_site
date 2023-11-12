@@ -7,6 +7,6 @@ import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/display.css'
 import 'animate.css'
 import '@icon-park/vue-next/styles/index.css'
-import zhCn from "element-plus/dist/locale/zh-cn.mjs"
 
-createApp(App).use(store).use(router).use(ElementPlus, {locale: zhCn}).mount('#app')
+
+createApp(App).use(store).use(router).use(ElementPlus).mount('#app')

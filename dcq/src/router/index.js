@@ -5,6 +5,7 @@ import ProjectView from "@/views/ProjectView.vue";
 import BlogView from "@/views/BlogView.vue";
 import AboutView from "@/views/AboutView.vue";
 import CoverView from "@/views/CoverView.vue";
+import AdminView from "@/views/AdminView.vue";
 
 const routes = [
     {
@@ -32,6 +33,10 @@ const routes = [
         path: "/cover",
         name: "cover",
         component: CoverView
+    }, {
+        path: "/dacdqmin",
+        name: "admin",
+        component: AdminView
     }
 ]
 
